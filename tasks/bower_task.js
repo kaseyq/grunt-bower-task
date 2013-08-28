@@ -32,8 +32,8 @@ module.exports = function(grunt) {
     callback();
   }
 
-  function install(endpoints, options, config, callback) {
-    bower.commands.install( endpoints, options, config )
+  function install(installOptions, callback) {
+    bower.commands.install( null, installOptions )
       .on('log', function(result) {
         log(result.id + ' ' + result.message);
       })
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 
     if (options.install) {
       add('Installed bower packages', function(callback) {
-        install(options.install.endpoints, options.install.options, options.install.config, callback);
+        install(options.install.options, callback);
       });
     }
 
