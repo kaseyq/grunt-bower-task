@@ -62,11 +62,9 @@ module.exports = function(grunt) {
         targetDir: './lib',
         layout: 'byType',
         install: {
-          endpoints: null,
           options: {
             production: true
-          },
-          config: null
+          }
         },
         verbose: false,
         copy: true,
