@@ -59,7 +59,7 @@ module.exports = function(grunt) {
       options = this.options({
         cleanTargetDir: false,
         cleanBowerDir: false,
-        targetDir: './lib',
+        targetDir: './bower_components',
         layout: 'byType',
         install: {
           options: {
