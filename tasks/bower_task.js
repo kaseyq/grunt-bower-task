@@ -32,11 +32,10 @@ module.exports = function(grunt) {
     callback();
   }
 
-  function install(installOptions, callback) {
-    bower.commands.install( null, installOptions )
-      .on('log', function(result) {
-        log(result.id + ' ' + result.message);
-      })
+  function install(options, callback) {
+    console.log( JSON.stringify( options ) );
+    bower.commands.install( options.endpoints, options.options, options.config)
+      .on('log', log)
       .on('error', fail)
       .on('end', callback);
   }
@@ -61,14 +60,14 @@ module.exports = function(grunt) {
         cleanBowerDir: false,
         targetDir: './lib',
         layout: 'byType',
+        //Install is now object that allows all command arguments
         install: {
-          options: {
-            production: true
-          }
+          options: null,
+          config: null,
+          endpoints: null
         },
         verbose: false,
-        copy: true,
-        
+        copy: true
       }),
       add = function(name, fn) {
         tasks.push(function(callback) {
@@ -80,14 +79,12 @@ module.exports = function(grunt) {
       },
       bowerDir = path.resolve(bower.config.directory),
       targetDir = path.resolve(options.targetDir);
-
+      
+    console.log( targetDir );
     log.logger = options.verbose ? grunt.log : grunt.verbose;
     options.layout = LayoutsManager.getLayout(options.layout, fail);
     options.cwd = grunt.option('base') || process.cwd();
-    
-    if (options.install)
-    options.install = grunt.option('base') 
-    
+
     if (options.cleanup !== undefined) {
       options.cleanTargetDir = options.cleanBowerDir = options.cleanup;
     }
@@ -100,7 +97,7 @@ module.exports = function(grunt) {
 
     if (options.install) {
       add('Installed bower packages', function(callback) {
-        install(options.install.options, callback);
+        install( options.install, callback );
       });
     }
 
