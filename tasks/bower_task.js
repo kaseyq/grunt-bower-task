@@ -33,7 +33,6 @@ module.exports = function(grunt) {
   }
 
   function install(options, callback) {
-    console.log( JSON.stringify( options ) );
     bower.commands.install( options.endpoints, options.options, options.config)
       .on('log', log)
       .on('error', fail)
@@ -80,7 +79,6 @@ module.exports = function(grunt) {
       bowerDir = path.resolve(bower.config.directory),
       targetDir = path.resolve(options.targetDir);
       
-    console.log( targetDir );
     log.logger = options.verbose ? grunt.log : grunt.verbose;
     options.layout = LayoutsManager.getLayout(options.layout, fail);
     options.cwd = grunt.option('base') || process.cwd();
