@@ -57,7 +57,7 @@ module.exports = function(grunt) {
       options = this.options({
         cleanTargetDir: false,
         cleanBowerDir: false,
-        targetDir: './lib',
+        targetDir: './bower_components',
         layout: 'byType',
         //Install is now object that allows all command arguments
         install: {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
           endpoints: null
         },
         verbose: false,
-        copy: true
+        copy: false
       }),
       add = function(name, fn) {
         tasks.push(function(callback) {
